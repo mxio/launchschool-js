@@ -12,7 +12,7 @@ console.log(integers); // => [1, 3, -4]
 let things = [1, 'a', '1', 3, NaN, 3.1415, -4, null, false];
 
 function findIntegers(arr) {
-  return arr.filter(num => Number.isInteger(num) === true);
+  return arr.filter(num => Number.isInteger(num));
 }
 
 let integers = findIntegers(things);
