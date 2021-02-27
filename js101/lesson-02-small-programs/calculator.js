@@ -24,7 +24,7 @@ while (invalidNumber(number1)) {
   number1 = readline.question();
 }
 
-prompt("What's the second number?")
+prompt("What's the second number?");
 let number2 = readline.question();
 
 while (invalidNumber(number2)) {

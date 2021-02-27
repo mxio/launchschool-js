@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 // number * 10 to find index
 // if fibonnacci is less than or equal ((number * 10) / number)
 // iterate and set length to ((number * 10) / number)
@@ -11,18 +12,18 @@ function findFibonacciIndexByLength(number) {
 
   let arr = [0, 1];
   let index = 0;
+  let sum = 1;
 
   for (let i = 2; i <= arr.length; i += 1) {
-    arr.push(arr[i - 2] + arr[i - 1]);
+    arr.push(BigInt(arr[i - 2]) + BigInt(arr[i - 1]));
+
     if (BigInt(arr[i]) / places >= 1) {
       index = arr[i];
       break;
     }
   }
-  console.log(BigInt(arr.indexOf(index)));
+
   return BigInt(arr.indexOf(index));
-
-
 }
 
 console.log(findFibonacciIndexByLength(2n) === 7n);    // 1 1 2 3 5 8 13
