@@ -17,44 +17,43 @@ console.log('Welcome to the Mortgage Calculator!');
 let readline = require('readline-sync');
 
 function greaterThanZero(amount) {
-  return amount > 0;
+  return Number(amount) > 0 && amount.trim() !== '';
 }
 
 while (true) {
-  let loanAmount = Number(readline.question('Enter the loan amount\n'));
-
-  if (!greaterThanZero(loanAmount)) {
-    loanAmount = Number(readline.question('Please enter a valid loan amount of 0 or greater.\n'));
+  let loanAmount = readline.question('Enter the loan amount\n');
+  while (!greaterThanZero(loanAmount)) {
+    loanAmount = readline.question('Please enter a valid loan amount of 0 or greater.\n');
   }
 
-  let apr = Number(readline.question('Enter the APR rate. If 5%, enter 5.\n'));
-
-  if (!greaterThanZero(apr)) {
-    apr = Number(readline.question('Enter a valid APR greater than 0.\n'));
+  let apr = readline.question('Enter the APR rate. If 5%, enter 5.\n');
+  while (!greaterThanZero(apr)) {
+    apr = readline.question('Enter a valid APR greater than 0.\n');
   }
 
-  let durationInYears = Number(readline.question('Enter the loan duration in years.\n'));
-
-  if (!greaterThanZero(durationInYears)) {
-    durationInYears = Number(readline.question('Please enter a loan duration greater than 0.\n'));
+  let durationInYears = readline.question('Enter the loan duration in years.\n');
+  while (!greaterThanZero(durationInYears)) {
+    durationInYears = readline.question('Please enter a loan duration greater than 0.\n');
   }
 
-  let monthlyInterest = (apr / 100) / 12;
-  let durationInMonths = durationInYears * 12;
+  let monthlyInterest = (Number(apr) / 100) / 12;
+  let durationInMonths = Number(durationInYears) * 12;
 
-  let monthlyPayment = loanAmount *
+  let monthlyPayment = Number(loanAmount) *
     (monthlyInterest /
       (1 - Math.pow((1 + monthlyInterest), (-durationInMonths))));
 
   console.log(`Your monthly payment is $${monthlyPayment.toFixed(2)} for ${durationInMonths} months.`);
 
-  let startOver = readline.question('Would you like to do another calculation? Enter Y for Yes and N for No.\n');
+  let startOver = readline.question('Would you like to do another calculation? Enter Y for Yes and N for No.\n').toLowerCase();
 
-  while (startOver !== 'Y' && startOver !== 'N') {
+  while (startOver !== 'y' && startOver !== 'n') {
     startOver = readline.question('Please enter Y or N.\n');
   }
 
-  if (startOver === 'N') {
+  if (startOver === 'n') {
     break;
+  } else {
+    console.clear();
   }
 }
